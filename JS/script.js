@@ -94,8 +94,8 @@ var upperCasedCharacters = [
 // Function to generate password with user input
 function generatePassword() {
   console.log('Button works');
+  getLength();
 }
-// Asks for length of password
 
 // Asks user for password criteria
 function getPasswordOptions() {
@@ -115,8 +115,8 @@ function writePassword() {
 
   var passwordText = document.querySelector('#password');
 
-  passwordText.value = "test";
-  // passwordText.value = password;
+  // passwordText.value = "test";
+  passwordText.value = password;
 }
 
 // PWOptions object
@@ -126,40 +126,84 @@ let PWOptions = {
   numbers: false,
   special: false,
   lower: false,
-  upper: false
+  upper: false,
+  oneType: 0
 };
 
-// Function to prompt user for password options
-// check if 5 options chosen
-// Create an array of length set by user
-prompt('Enter a password length between 10 and 64 charachters');
+console.log(PWOptions.length);
+
+// Asks for length of password
+function getLength() {
+  let passLength = prompt('Enter a password length between 10 and 64 characters');
+  if (passLength > 9 && passLength < 65) {
+    PWOptions.length = passLength;
+    console.log(PWOptions.length);
+    confirmNumbers();
+  } getLength();
+}
 
 // Asks if numbers are to be included
 function confirmNumbers() {
   if (confirm('Do you want numbers (3,7,6) in your password?')) {
     PWOptions.numbers = true;
-  }
+    PWOptions.oneType++;
+    console.log(PWOptions.oneType);
+  } confirmSpecial();
 }
-
 // Asks if special characters are to be included
-
-function confirmSpecial{
+function confirmSpecial() {
   if (confirm('Do you want special characters ({,],/) in your password?')
   ) {
     PWOptions.special = true;
-  }
+    PWOptions.oneType++;
+    console.log(PWOptions.oneType);
+
+  } confirmLower();
 }
 
 // Asks if lowercase characters are to be included
-(confirm('Do you want lowercase characters (w,f,g) in your password?')
-)
-  // Asks if uppercase characters are to be included
-  (confirm('Do you want uppercase characters (S,T,P) in your password?')
-  );
+function confirmLower() {
+  if (confirm('Do you want lowercase characters (w,f,g) in your password?')
+  ) {
+    PWOptions.lower = true;
+    PWOptions.oneType++;
+    console.log(PWOptions.oneType);
+
+  } confirmUpper();
+}
+// Asks if uppercase characters are to be included
+function confirmUpper() {
+  if (confirm('Do you want uppercase characters (S,T,P) in your password?')
+  ) {
+    PWOptions.upper = true;
+    PWOptions.oneType++;
+    console.log(PWOptions.oneType);
+
+  } checkSelections();
+}
+
+function checkSelections() {
+  if (PWOptions.oneType > 0) {
+    return getRandom(specialCharacters);
+  } else {
+    alert("You must pick at least one character type for a password to generate");
+    return confirmNumbers();
+  }
+
+}
 // Populate array with random characters selected from character array
-let characterArray;
+let characterArray = [];
 // Create character array from selections by user
 // Function for getting a random element from an array
 function getRandom(arr) {
+  console.log(arr);
+}
+
+// build characterArray
+
+function buildArray() {
+  if (PWOptions.numbers) {
+    characterArray.concat(PWOptions.numbers);
+  }
 
 }
