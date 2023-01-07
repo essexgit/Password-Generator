@@ -89,17 +89,10 @@ var upperCasedCharacters = [
 ];
 
 //Pseudo code
-// Displays a password
 
 // Function to generate password with user input
 function generatePassword() {
-  console.log('Button works');
   getLength();
-}
-
-// Asks user for password criteria
-function getPasswordOptions() {
-
 }
 
 // Get references to the #generate element
@@ -184,7 +177,7 @@ function confirmUpper() {
 
 function checkSelections() {
   if (PWOptions.oneType > 0) {
-    return getRandom(specialCharacters);
+    return buildArray();
   } else {
     alert("You must pick at least one character type for a password to generate");
     return confirmNumbers();
@@ -192,18 +185,37 @@ function checkSelections() {
 
 }
 // Populate array with random characters selected from character array
-let characterArray = [];
-// Create character array from selections by user
+// create password by looping PWOptions.length times
+// each time produce random integer between 0 and characterArray.length
+
+
 // Function for getting a random element from an array
 function getRandom(arr) {
-  console.log(arr);
+  let passwordArray = [];
+  for (let i = 0; i < PWOptions.length; i++) {
+    passwordArray[i] = Math.floor(Math.random() * arr.length);
+  }
+  console.log(passwordArray);
+  console.log(arr.length);
+  return passwordArray;
 }
 
 // build characterArray
 
 function buildArray() {
+  let characterArray = [];
   if (PWOptions.numbers) {
-    characterArray.concat(PWOptions.numbers);
+    characterArray = characterArray.concat(numericCharacters);
+  }
+  if (PWOptions.special) {
+    characterArray = characterArray.concat(specialCharacters);
+  }
+  if (PWOptions.numbers) {
+    characterArray = characterArray.concat(lowerCasedCharacters);
+  }
+  if (PWOptions.numbers) {
+    characterArray = characterArray.concat(upperCasedCharacters);
   }
 
+  return getRandom(characterArray);
 }
