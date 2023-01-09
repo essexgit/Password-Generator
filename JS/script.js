@@ -90,37 +90,47 @@ var upperCasedCharacters = [
 
 //Pseudo code
 
+// Function to prompt user for password options
+function getPasswordOptions() {
+
+}
+
+// Function for getting a random element from an array
+function getRandom(arr) {
+
+}
+
 // Function to generate password with user input
 function generatePassword() {
-  getLength();
+  if (PWOptions.finalPass) {
+    return PWOptions.finalPass;
+  } else { console.log("oh dear"); }
 }
 
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
 
-// Add event listener to generate button
-generateBtn.addEventListener('click', writePassword);
-
 // Write password to the #password input
 function writePassword() {
-
   var password = generatePassword();
-
   var passwordText = document.querySelector('#password');
 
-  // passwordText.value = "test";
   passwordText.value = password;
 }
 
+// Add event listener to generate button
+generateBtn.addEventListener('click', writePassword);
 // PWOptions object
 
+// options object
 let PWOptions = {
   length: 0,
   numbers: false,
   special: false,
   lower: false,
   upper: false,
-  oneType: 0
+  oneType: 0,
+  finalPass: false
 };
 
 console.log(PWOptions.length);
@@ -185,11 +195,19 @@ function checkSelections() {
 
 }
 // Populate array with random characters selected from character array
-// create password by looping PWOptions.length times
 // each time produce random integer between 0 and characterArray.length
 
+function producePassword(passwordArray, characterArray) {
+  let arrayedPassword = [];
+  for (let i = 0; i < passwordArray.length; i++) {
+    arrayedPassword.push(characterArray[passwordArray[i]]);
+  }
+  return (PWOptions.finalPass = arrayedPassword);
+}
+//loop through passwordArray using values as positions in characterArray to make password
 
 // Function for getting a random element from an array
+// create password by looping PWOptions.length times
 function getRandom(arr) {
   let passwordArray = [];
   for (let i = 0; i < PWOptions.length; i++) {
@@ -197,7 +215,7 @@ function getRandom(arr) {
   }
   console.log(passwordArray);
   console.log(arr.length);
-  return passwordArray;
+  return producePassword(passwordArray, arr);
 }
 
 // build characterArray
