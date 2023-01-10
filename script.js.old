@@ -88,14 +88,17 @@ var upperCasedCharacters = [
   'Z'
 ];
 
+//Pseudo code
+
 // Function to prompt user for password options
 function getPasswordOptions() {
-  confirmNumbers();
-  confirmSpecial();
-  confirmLower();
-  confirmUpper();
-  checkSelections();
+
 }
+
+// // Function for getting a random element from an array
+// function getRandom(arr) {
+
+// }
 
 // Function to generate password with user input
 function generatePassword() {
@@ -147,7 +150,7 @@ function getLength() {
   let passLength = prompt('Enter a password length between 10 and 64 characters');
   if (passLength > 9 && passLength < 65) {
     PWOptions.length = passLength;
-    getPasswordOptions();
+    confirmNumbers();
   } else { getLength(); };
 }
 
@@ -158,6 +161,7 @@ function confirmNumbers() {
     PWOptions.oneType++;
 
   }
+  confirmSpecial();
 }
 // Special Characters?
 function confirmSpecial() {
@@ -167,6 +171,7 @@ function confirmSpecial() {
     PWOptions.oneType++;
 
   }
+  confirmLower();
 }
 
 // LowerCase?
@@ -175,7 +180,9 @@ function confirmLower() {
   ) {
     PWOptions.lower = true;
     PWOptions.oneType++;
+
   }
+  confirmUpper();
 }
 // Uppercased
 function confirmUpper() {
@@ -185,6 +192,7 @@ function confirmUpper() {
     PWOptions.oneType++;
 
   }
+  checkSelections();
 }
 
 function checkSelections() {
@@ -193,7 +201,7 @@ function checkSelections() {
     buildArray();
   } else {
     alert("You must pick at least one character type for a password to generate");
-    return getPasswordOptions();
+    return confirmNumbers();
   }
 }
 // Populate array with random characters selected from character array
