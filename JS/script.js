@@ -95,16 +95,28 @@ function getPasswordOptions() {
 
 }
 
-// Function for getting a random element from an array
-function getRandom(arr) {
+// // Function for getting a random element from an array
+// function getRandom(arr) {
 
-}
+// }
 
 // Function to generate password with user input
 function generatePassword() {
-  if (PWOptions.finalPass) {
-    return PWOptions.finalPass;
-  } else { console.log("oh dear"); }
+  PWOptions = {
+    length: 0,
+    numbers: false,
+    special: false,
+    lower: false,
+    upper: false,
+    oneType: 0,
+    finalPass: ''
+  };
+  getLength();
+  return PWOptions.finalPass;
+
+  // else {
+  //   return PWOptions.finalPass;
+  // }
 }
 
 // Get references to the #generate element
@@ -130,79 +142,79 @@ let PWOptions = {
   lower: false,
   upper: false,
   oneType: 0,
-  finalPass: false
+  finalPass: ''
 };
 
-console.log(PWOptions.length);
-
-// Asks for length of password
+// Length? and Check
 function getLength() {
   let passLength = prompt('Enter a password length between 10 and 64 characters');
   if (passLength > 9 && passLength < 65) {
     PWOptions.length = passLength;
-    console.log(PWOptions.length);
     confirmNumbers();
-  } getLength();
+  } else { getLength(); };
 }
 
-// Asks if numbers are to be included
+// Numbers?
 function confirmNumbers() {
   if (confirm('Do you want numbers (3,7,6) in your password?')) {
     PWOptions.numbers = true;
     PWOptions.oneType++;
-    console.log(PWOptions.oneType);
-  } confirmSpecial();
+
+  }
+  confirmSpecial();
 }
-// Asks if special characters are to be included
+// Special Characters?
 function confirmSpecial() {
   if (confirm('Do you want special characters ({,],/) in your password?')
   ) {
     PWOptions.special = true;
     PWOptions.oneType++;
-    console.log(PWOptions.oneType);
 
-  } confirmLower();
+  }
+  confirmLower();
 }
 
-// Asks if lowercase characters are to be included
+// LowerCase?
 function confirmLower() {
   if (confirm('Do you want lowercase characters (w,f,g) in your password?')
   ) {
     PWOptions.lower = true;
     PWOptions.oneType++;
-    console.log(PWOptions.oneType);
 
-  } confirmUpper();
+  }
+  confirmUpper();
 }
-// Asks if uppercase characters are to be included
+// Uppercased
 function confirmUpper() {
   if (confirm('Do you want uppercase characters (S,T,P) in your password?')
   ) {
     PWOptions.upper = true;
     PWOptions.oneType++;
-    console.log(PWOptions.oneType);
 
-  } checkSelections();
+  }
+  checkSelections();
 }
 
 function checkSelections() {
+  console.log(PWOptions.oneType);
   if (PWOptions.oneType > 0) {
-    return buildArray();
+    buildArray();
   } else {
     alert("You must pick at least one character type for a password to generate");
     return confirmNumbers();
   }
-
 }
 // Populate array with random characters selected from character array
 // each time produce random integer between 0 and characterArray.length
 
 function producePassword(passwordArray, characterArray) {
-  let arrayedPassword = [];
-  for (let i = 0; i < passwordArray.length; i++) {
-    arrayedPassword.push(characterArray[passwordArray[i]]);
+  // let arrayedPassword = [];
+  for (let i = PWOptions.oneType; i < passwordArray.length; i++) {
+    // arrayedPassword.push(characterArray[passwordArray[i]]);
+    PWOptions.finalPass += characterArray[passwordArray[i]];
   }
-  return (PWOptions.finalPass = arrayedPassword);
+  // PWOptions.finalPass = arrayedPassword.join('');
+  console.log(PWOptions.finalPass);
 }
 //loop through passwordArray using values as positions in characterArray to make password
 
@@ -210,12 +222,10 @@ function producePassword(passwordArray, characterArray) {
 // create password by looping PWOptions.length times
 function getRandom(arr) {
   let passwordArray = [];
-  for (let i = 0; i < PWOptions.length; i++) {
+  for (let i = PWOptions.oneType; i < PWOptions.length; i++) {
     passwordArray[i] = Math.floor(Math.random() * arr.length);
   }
-  console.log(passwordArray);
-  console.log(arr.length);
-  return producePassword(passwordArray, arr);
+  producePassword(passwordArray, arr);
 }
 
 // build characterArray
@@ -224,16 +234,20 @@ function buildArray() {
   let characterArray = [];
   if (PWOptions.numbers) {
     characterArray = characterArray.concat(numericCharacters);
+    PWOptions.finalPass += numericCharacters[Math.floor(Math.random() * numericCharacters.length)];
   }
   if (PWOptions.special) {
     characterArray = characterArray.concat(specialCharacters);
+    PWOptions.finalPass += specialCharacters[Math.floor(Math.random() * specialCharacters.length)];
   }
-  if (PWOptions.numbers) {
+  if (PWOptions.lower) {
     characterArray = characterArray.concat(lowerCasedCharacters);
+    PWOptions.finalPass += lowerCasedCharacters[Math.floor(Math.random() * lowerCasedCharacters.length)];
   }
-  if (PWOptions.numbers) {
+  if (PWOptions.upper) {
     characterArray = characterArray.concat(upperCasedCharacters);
+    PWOptions.finalPass += upperCasedCharacters[Math.floor(Math.random() * upperCasedCharacters.length)];
   }
-
-  return getRandom(characterArray);
+  console.log(PWOptions.finalPass);
+  getRandom(characterArray);
 }
