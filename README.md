@@ -7,6 +7,7 @@ Generate a random password based on criteria selected
 - I was provided with four arrays containing Upper and Lower case characters, numbers and special characters
 - I wrote and continually revised pseudocode laying out the logic, and kept console testing at every step
 - This project helped me learn writing to objects and better understand how function returns work
+- I learned that I can 'build' a string using the += incremental operator
 
 ### User Story
 
@@ -34,11 +35,12 @@ SO THAT I can be secure when setting up accounts.
 
 ## Installation
 
-This is a basic static front-end website deployment which can be deployed on any server or client with a browser. [The GIThub page deployment](https://essexgit.github.io/Console-Finances/)
+This is a basic static front-end website deployment which can be deployed on any server or client with a browser. [The GIThub page deployment](https://essexgit.github.io/Password-Generator/)
 
 ## Credits
 
 The starting, non-functioning code and styled layout is provided by EdX
+Thanks to tutor Juan Delgado who helped me simplify, understand that 'return' is also 'go back' and that += incrementor appends to strings.
 
 ## Licence
 This work is published under the [MIT Licence](./LICENSE)

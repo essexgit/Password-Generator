@@ -134,6 +134,7 @@ let PWOptions = {
   special: false,
   lower: false,
   upper: false,
+  // check how many types have been chosen
   oneType: 0,
   finalPass: ''
 };
@@ -192,24 +193,14 @@ function checkSelections() {
 // Populate array with random characters selected from character array
 // each time produce random integer between 0 and characterArray.length
 
-function producePassword(passwordArray, characterArray) {
-  // let arrayedPassword = [];
-  for (let i = PWOptions.oneType; i < passwordArray.length; i++) {
-    // arrayedPassword.push(characterArray[passwordArray[i]]);
-    PWOptions.finalPass += characterArray[passwordArray[i]];
-  }
-  // PWOptions.finalPass = arrayedPassword.join('');
-}
-//loop through passwordArray using values as positions in characterArray to make password
-
-// Function for getting a random element from an array
-// create password by looping PWOptions.length times
-function getRandom(arr) {
+function producePassword(arr) {
   let passwordArray = [];
   for (let i = PWOptions.oneType; i < PWOptions.length; i++) {
+    // build array of random numbers
     passwordArray[i] = Math.floor(Math.random() * arr.length);
+    // use random array to create password from available characters
+    PWOptions.finalPass += arr[passwordArray[i]];
   }
-  producePassword(passwordArray, arr);
 }
 
 // build characterArray, concat each chosen type
@@ -232,5 +223,5 @@ function buildArray() {
     characterArray = characterArray.concat(upperCasedCharacters);
     PWOptions.finalPass += upperCasedCharacters[Math.floor(Math.random() * upperCasedCharacters.length)];
   }
-  getRandom(characterArray);
+  producePassword(characterArray);
 }
