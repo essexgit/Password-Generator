@@ -99,6 +99,7 @@ function getPasswordOptions() {
 
 // Function to generate password with user input
 function generatePassword() {
+  // reset options object
   PWOptions = {
     length: 0,
     numbers: false,
@@ -110,10 +111,6 @@ function generatePassword() {
   };
   getLength();
   return PWOptions.finalPass;
-
-  // else {
-  //   return PWOptions.finalPass;
-  // }
 }
 
 // Get references to the #generate element
@@ -129,7 +126,6 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
-// PWOptions object
 
 // options object
 let PWOptions = {
@@ -165,7 +161,6 @@ function confirmSpecial() {
   ) {
     PWOptions.special = true;
     PWOptions.oneType++;
-
   }
 }
 
@@ -183,12 +178,10 @@ function confirmUpper() {
   ) {
     PWOptions.upper = true;
     PWOptions.oneType++;
-
   }
 }
 
 function checkSelections() {
-  console.log(PWOptions.oneType);
   if (PWOptions.oneType > 0) {
     buildArray();
   } else {
@@ -206,7 +199,6 @@ function producePassword(passwordArray, characterArray) {
     PWOptions.finalPass += characterArray[passwordArray[i]];
   }
   // PWOptions.finalPass = arrayedPassword.join('');
-  console.log(PWOptions.finalPass);
 }
 //loop through passwordArray using values as positions in characterArray to make password
 
@@ -220,8 +212,8 @@ function getRandom(arr) {
   producePassword(passwordArray, arr);
 }
 
-// build characterArray
-
+// build characterArray, concat each chosen type
+//add at least 1 of each type to final array
 function buildArray() {
   let characterArray = [];
   if (PWOptions.numbers) {
@@ -240,6 +232,5 @@ function buildArray() {
     characterArray = characterArray.concat(upperCasedCharacters);
     PWOptions.finalPass += upperCasedCharacters[Math.floor(Math.random() * upperCasedCharacters.length)];
   }
-  console.log(PWOptions.finalPass);
   getRandom(characterArray);
 }
